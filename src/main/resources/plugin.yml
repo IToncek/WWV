@@ -7,3 +7,7 @@ load: STARTUP
 authors: [ ajToncek ]
 description: In this video, we'll be playing minecraft, but our texturepack changes every two minutes
 website: https://plugins.itoncek.cf
+commands:
+  start:
+    description: This command will start the game
+    usage: '§4 Are you sure, that you want to start this game? This could effect all blocks on this server. If you are 100% sure, do /start true'

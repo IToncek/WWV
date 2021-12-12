@@ -55,4 +55,5 @@ public final class WeirdWelprVideo extends JavaPlugin {
             p.kickPlayer(ChatColor.RED + "Server is closed, thanks for playing " + ChatColor.YELLOW + ChatColor.BOLD + "★");
         }
     }
+
 }

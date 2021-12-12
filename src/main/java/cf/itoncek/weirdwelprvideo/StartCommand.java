@@ -21,11 +21,7 @@ public class StartCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (args[0] != "true") {
-            return false;
-        } else {
-            WeirdWelprVideo.run.runTaskTimer(WeirdWelprVideo.plugin, 20*120L, 20*120);
-            return true;
-        }
+        WeirdWelprVideo.run.runTaskTimer(WeirdWelprVideo.plugin, 20 * 10L, 20 * 120L);
+        return true;
     }
 }
