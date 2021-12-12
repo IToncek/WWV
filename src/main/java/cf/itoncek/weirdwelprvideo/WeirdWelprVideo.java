@@ -45,7 +45,7 @@ public final class WeirdWelprVideo extends JavaPlugin {
         for (Player p : Bukkit.getOnlinePlayers()){
             p.setGameMode(GameMode.SPECTATOR);
             invincibility.put(p, true);
-            p.setResourcePack("https://github.com/IToncek/WWV/raw/main/packs/wwv" + number + ".zip", resourcepacky.get("https://github.com/IToncek/WWV/raw/main/packs/wwv" + number + ".zip"));
+            p.setResourcePack("https://github.com/IToncek/WWV/raw/main/packs/wwv" + number + ".zip");
         }
     }
 
