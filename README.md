@@ -7,7 +7,7 @@
   <a href="https://twitter.com/ytoncek" target="_blank">
     <img alt="Twitter: ytoncek" src="https://img.shields.io/twitter/follow/ytoncek.svg?style=social" />
   </a>
-</p>[![Java CI](https://github.com/IToncek/WWV/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/IToncek/WWV/actions/workflows/main.yml)
+</p> [![Java CI](https://github.com/IToncek/WWV/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/IToncek/WWV/actions/workflows/main.yml)
 
 > This plugin changes the texturepack every 2 minutes. Try beating the game with the plugin.
 
