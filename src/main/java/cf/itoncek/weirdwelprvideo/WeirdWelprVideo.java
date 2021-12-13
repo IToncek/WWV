@@ -1,52 +1,87 @@
 package cf.itoncek.weirdwelprvideo;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
+import java.util.logging.Logger;
 
 public final class WeirdWelprVideo extends JavaPlugin {
-    public static HashMap<String, String> resourcepacky = new HashMap<>();
-    public static HashMap<Player, Boolean> invincibility = new HashMap<>();
+    public static final HashMap<Player, Long> countdown = new HashMap<>();
     public static WeirdWelprVideo plugin;
-    public static BukkitRunnable run = new BukkitRunnable() {
+    public static final Logger log = Bukkit.getLogger();
+    public static final BukkitRunnable run = new BukkitRunnable() {
         @Override
         public void run() {
             for (Player p : Bukkit.getOnlinePlayers()){
                 p.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "⚠️ Loading new resourcepack ⚠️", "If you see this, please move.", 20, 10000, 20);
             }
-            WeirdWelprVideo.run();
+            try {
+                WeirdWelprVideo.run();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+    public static final BukkitRunnable pinger = new BukkitRunnable() {
+        @Override
+        public void run() {
+            LocalTime before = LocalTime.now();
+            try {
+                request("https://WWVresourcepackhelper.madebyitoncek.repl.co/");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                LocalTime now = LocalTime.now();
+                long ms = ChronoUnit.MILLIS.between(before, now);
+                for (Player p:Bukkit.getOnlinePlayers()){
+                    p.sendActionBar(Component.text(ChatColor.GREEN + "Ping: " + ms));
+                }
+            }
         }
     };
 
     @Override
     public void onEnable() {
         plugin = this;
-        resourcepacky.put("https://github.com/IToncek/WWV/raw/main/packs/wwv0.zip", "e5f2174f02936f5bc2e3f019bb7daa9bc96ff092");
-        resourcepacky.put("https://github.com/IToncek/WWV/raw/main/packs/wwv1.zip", "aef3d15b56c3c566bedd6b3330f7b6670ffe331f");
-        resourcepacky.put("https://github.com/IToncek/WWV/raw/main/packs/wwv2.zip", "a23a0ef9442dc64dc595890010e5c436adffffa7");
-        resourcepacky.put("https://github.com/IToncek/WWV/raw/main/packs/wwv3.zip", "b3c5fa4913dcb94032ed708da941212930613302");
-        resourcepacky.put("https://github.com/IToncek/WWV/raw/main/packs/wwv4.zip", "fb51a0c0cbeee15f94159015f9bfafb3e5d172df");
-        resourcepacky.put("https://github.com/IToncek/WWV/raw/main/packs/wwv5.zip", "030ccc64307ace0a306c690a9a6959bf04e4b2fa");
-        resourcepacky.put("https://github.com/IToncek/WWV/raw/main/packs/wwv6.zip", "9f182b6a857bdeb2b51d147f81c0e8f9ea39516f");
-        resourcepacky.put("https://github.com/IToncek/WWV/raw/main/packs/wwv7.zip", "1f8163082d0b32b3286759a75583f4f41c203d25");
-        resourcepacky.put("https://github.com/IToncek/WWV/raw/main/packs/wwv8.zip", "5da953b70bda49ac8eb71b65339edce09e19afda");
-        Bukkit.getPluginCommand("start").setExecutor(new StartCommand());
-        getServer().getPluginManager().registerEvents(new MoveListener(), plugin);
+        Objects.requireNonNull(Bukkit.getPluginCommand("start")).setExecutor(new StartCommand());
     }
-    public static void run(){
+    public static void run() throws IOException {
         Random rand = new Random();
         int number = rand.nextInt(8);
+        log.info(String.valueOf(number));
+        log.info(String.valueOf(number));
+        log.info(String.valueOf(number));
+        log.info(String.valueOf(number));
         for (Player p : Bukkit.getOnlinePlayers()){
             p.setGameMode(GameMode.SPECTATOR);
-            invincibility.put(p, true);
-            p.setResourcePack("https://github.com/IToncek/WWV/raw/main/packs/wwv" + number + ".zip");
+            countdown.put(p, 10L);
+            p.setResourcePack("https://wwvresourcepackhelper.madebyitoncek.repl.co/download/" + number, request("https://wwvresourcepackhelper.madebyitoncek.repl.co/sha1/"+number),true);
         }
+    }
+
+    public static String request(@NotNull String url) throws IOException {
+        URL licenceserver = new URL(url);
+        URLConnection yc = licenceserver.openConnection();
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(
+                        yc.getInputStream()));
+        return in.readLine();
     }
 
     @Override

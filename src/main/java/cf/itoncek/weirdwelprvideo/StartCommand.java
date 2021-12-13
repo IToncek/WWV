@@ -3,6 +3,7 @@ package cf.itoncek.weirdwelprvideo;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 public class StartCommand implements CommandExecutor {
@@ -22,6 +23,8 @@ public class StartCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         WeirdWelprVideo.run.runTaskTimer(WeirdWelprVideo.plugin, 20 * 10L, 20 * 120L);
+        @NotNull Plugin plugin = WeirdWelprVideo.plugin;
+        WeirdWelprVideo.pinger.runTaskTimer(plugin, 1L, 60L);
         return true;
     }
 }
