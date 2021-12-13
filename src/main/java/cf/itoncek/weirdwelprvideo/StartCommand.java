@@ -24,7 +24,7 @@ public class StartCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         WeirdWelprVideo.run.runTaskTimer(WeirdWelprVideo.plugin, 20 * 10L, 20 * 120L);
         @NotNull Plugin plugin = WeirdWelprVideo.plugin;
-        WeirdWelprVideo.pinger.runTaskTimer(plugin, 1L, 60L);
+        WeirdWelprVideo.pinger.runTaskTimer(plugin, 1L, 20L);
         return true;
     }
 }

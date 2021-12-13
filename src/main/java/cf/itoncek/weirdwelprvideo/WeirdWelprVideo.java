@@ -3,7 +3,6 @@ package cf.itoncek.weirdwelprvideo;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -28,9 +27,6 @@ public final class WeirdWelprVideo extends JavaPlugin {
     public static final BukkitRunnable run = new BukkitRunnable() {
         @Override
         public void run() {
-            for (Player p : Bukkit.getOnlinePlayers()){
-                p.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "⚠️ Loading new resourcepack ⚠️", "If you see this, please move.", 20, 10000, 20);
-            }
             try {
                 WeirdWelprVideo.run();
             } catch (IOException e) {
@@ -64,13 +60,7 @@ public final class WeirdWelprVideo extends JavaPlugin {
     public static void run() throws IOException {
         Random rand = new Random();
         int number = rand.nextInt(8);
-        log.info(String.valueOf(number));
-        log.info(String.valueOf(number));
-        log.info(String.valueOf(number));
-        log.info(String.valueOf(number));
         for (Player p : Bukkit.getOnlinePlayers()){
-            p.setGameMode(GameMode.SPECTATOR);
-            countdown.put(p, 10L);
             p.setResourcePack("https://wwvresourcepackhelper.madebyitoncek.repl.co/download/" + number, request("https://wwvresourcepackhelper.madebyitoncek.repl.co/sha1/"+number),true);
         }
     }
