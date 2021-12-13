@@ -6,14 +6,14 @@
 
     <groupId>cf.itoncek</groupId>
     <artifactId>WeirdWelprVideo</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <name>WWV</name>
 
     <description>In this video, we'll be playing minecraft, but our texturepack changes every two minutes</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <url>https://plugins.itoncek.cf</url>
