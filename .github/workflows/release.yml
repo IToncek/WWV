@@ -1,12 +1,7 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 on:
-  workflow_dispatch:
-    inputs:
-      release-version:
-        description: 'Release version'
-        required: true
-        default: 'v.'
+  push:
 
 name: Release
 jobs:
@@ -30,8 +25,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: ${{ github.event.inputs.release-version }}
-          tag: ${{ github.event.inputs.release-version }}
           files: ./target/WeirdWelprVideo-*.*.jar
           generate_release_notes: true
       - name: Clean with Maven
