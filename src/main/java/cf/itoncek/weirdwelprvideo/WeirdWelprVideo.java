@@ -30,18 +30,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.Random;
 import java.util.logging.Logger;
+
+import static cf.itoncek.util.Util.erqst;
 
 public final class WeirdWelprVideo extends JavaPlugin {
     public static WeirdWelprVideo plugin;
@@ -61,9 +58,7 @@ public final class WeirdWelprVideo extends JavaPlugin {
         public void run() {
             LocalTime before = LocalTime.now();
             try {
-                request("https://WWVresourcepackhelper.madebyitoncek.repl.co/");
-            } catch (IOException e) {
-                e.printStackTrace();
+                erqst("https://WWVresourcepackhelper.madebyitoncek.repl.co/");
             } finally {
                 LocalTime now = LocalTime.now();
                 long ms = ChronoUnit.MILLIS.between(before, now);
@@ -83,18 +78,10 @@ public final class WeirdWelprVideo extends JavaPlugin {
         Random rand = new Random();
         int number = rand.nextInt(8);
         for (Player p : Bukkit.getOnlinePlayers()){
-            p.setResourcePack("https://wwvresourcepackhelper.madebyitoncek.repl.co/download/" + number, request("https://wwvresourcepackhelper.madebyitoncek.repl.co/sha1/"+number),true);
+            p.setResourcePack("https://wwvresourcepackhelper.madebyitoncek.repl.co/download/" + number, erqst("https://wwvresourcepackhelper.madebyitoncek.repl.co/sha1/"+number),true);
         }
     }
 
-    public static String request(@NotNull String url) throws IOException {
-        URL licenceserver = new URL(url);
-        URLConnection yc = licenceserver.openConnection();
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(
-                        yc.getInputStream()));
-        return in.readLine();
-    }
 
     @Override
     public void onDisable() {
