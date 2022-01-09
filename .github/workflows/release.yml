@@ -29,6 +29,9 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          name: ${{ github.event.inputs.release-version }}
+          tag: ${{ github.event.inputs.release-version }}
           files: ./target/WeirdWelprVideo-*.*.jar
+          generate_release_notes: true
       - name: Clean with Maven
         run: mvn clean
