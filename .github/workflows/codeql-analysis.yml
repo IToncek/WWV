@@ -33,6 +33,11 @@ jobs:
         # Learn more about CodeQL language support at https://git.io/codeql-language-support
 
     steps:
+    - uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          cache: 'maven'
     - name: Checkout repository
       uses: actions/checkout@v2
 
@@ -58,7 +63,12 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
 
-    - run: mvn -s $GITHUB_WORKSPACE/a/WWV/WWV/.github/workflows/maven-settings.xml -B package --file pom.xml 
+    
+      - name: Build with Maven
+        run: mvn -s $GITHUB_WORKSPACE/a/WWV/WWV/.github/workflows/maven-settings.xml -B package --file pom.xml 
+        env:
+          USER_NAME: ${{ secrets.USER_NAME }}
+          ACCESS_TOKEN: ${{ secrets.TOKEN }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
