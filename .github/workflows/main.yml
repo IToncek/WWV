@@ -24,11 +24,17 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
           cache: 'maven'
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: go, javascript
       - name: Build with Maven
         run: mvn -s $GITHUB_WORKSPACE/a/WWV/WWV/.github/workflows/maven-settings.xml -B package --file pom.xml 
         env:
           USER_NAME: ${{ secrets.USER_NAME }}
           ACCESS_TOKEN: ${{ secrets.TOKEN }}
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
       - uses: actions/upload-artifact@v2
         with:
           name: artifact
