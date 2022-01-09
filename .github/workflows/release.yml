@@ -23,6 +23,9 @@ jobs:
           cache: 'maven'
       - name: Build with Maven
         run: mvn -s $GITHUB_WORKSPACE/.github/workflows/maven-settings.xml -B package --file pom.xml
+        env:
+          USER_NAME: ${{ secrets.USER_NAME }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
