@@ -6,7 +6,7 @@
 
     <groupId>cf.itoncek</groupId>
     <artifactId>WeirdWelprVideo</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>WWV</name>
@@ -81,6 +81,11 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.13</version>
+        </dependency>
+        <dependency>
+            <groupId>cf.itoncek</groupId>
+            <artifactId>util</artifactId>
+            <version>1.2.1</version>
         </dependency>
     </dependencies>
 </project>
