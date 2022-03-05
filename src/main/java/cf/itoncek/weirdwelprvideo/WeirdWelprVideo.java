@@ -38,8 +38,6 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import static cf.itoncek.util.Util.erqst;
-
 public final class WeirdWelprVideo extends JavaPlugin {
     public static WeirdWelprVideo plugin;
     public static final Logger log = Bukkit.getLogger();
@@ -87,6 +85,16 @@ public final class WeirdWelprVideo extends JavaPlugin {
     public void onDisable() {
         for (Player p : Bukkit.getOnlinePlayers()){
             p.kickPlayer(ChatColor.RED + "Server is closed, thanks for playing " + ChatColor.YELLOW + ChatColor.BOLD + "★");
+        }
+    }
+    public static String erqst(String url) {
+        try {
+            URL conn = new URL(url);
+            URLConnection urlcon = conn.openConnection();
+            BufferedReader out = new BufferedReader(new InputStreamReader(urlcon.getInputStream()));
+            return out.readLine();
+        } catch (IOException e) {
+            return e.getMessage();
         }
     }
 
